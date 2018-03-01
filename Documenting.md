@@ -26,7 +26,8 @@ as some of them will not be caught by [CircleCi](https://circleci.com/).
 		"""
 	```
 
-3. Functions and methods that return something only include type and explanation, not the variable's name.
+3. Functions and methods that return something must include type and explanation. In cases where the output is complex
+   (say a tuple of different objects) names can also be used for clarity..
 	```
 	Returns
 	-------
@@ -34,14 +35,17 @@ as some of them will not be caught by [CircleCi](https://circleci.com/).
 		Topic distribution matrix of shape [num_docs, num_topics]
 	```
 
-4. References to methods, functions or classes of gensim are sphinx compliant using an absolute path (`:func:`, `:meth:`, `:class:`).
+4. References to methods, functions or classes of gensim are sphinx compliant using an absolute path (`:func:`, `:meth:`, `:class:`, `:mod:`).
 	
 	```
 	The projection can be later updated by merging it with another 
 	:class:`~gensim.models.lsimodel.Projection` via :meth:`~gensim.models.lsimodel.Projection.merge`.
 	```
+	The `~` symbol means that only the last part of the path will be rendered (`merge` in the above case). Always
+	provide full paths when linking.
 
-5. Each module comes with an example of 5 to 20 lines. Sample data from `gensim.test.utils` can be imported.
+5. Each user facing module comes with an example of 5 to 20 lines. Sample data from `gensim.test.utils` can be imported.
+   If a file only includes one class, then the examples are better suited in the file's docstring rather than inside the class.
 	```
 	Examples
 	--------
@@ -70,24 +74,23 @@ as some of them will not be caught by [CircleCi](https://circleci.com/).
 		Corpus in BoW format or as sparse matrix.
 	```
 
-7. In case of scripts, do not duplicate command line arg documentation, call it instead with `:program-output`. See file `~gensim.models.lsiworker.py`
-
-8. When documenting container types, mention their shape (if known) like: shape is (a, b).
+7. When documenting container types, mention their shape (if known) like: shape is (a, b).
 	```
 	docs : iterable of iterable of (int, float)
 		Stream of document vectors or sparse matrix of shape: (`num_terms`, num_documents).
 	```
 
-9. When referring to variables in the code use the `` ` `` (backtick) symbol.
+8. When referring to variables in the code use the `` ` `` (backtick) symbol.
 See example above where `num_terms` is method argument.
 
-10. When referencing a paper use the `` `authors: "title, journal" <link>`_`` syntax.
+9. When referencing a paper use the `` `authors: "title, journal" <link>`_`` syntax.
 	```
 	Explained in `Gerlof Bouma: "Normalized (Pointwise) Mutual Information in Collocation Extraction"
 	<https://svn.spraakdata.gu.se/repos/gerlof/pub/www/Docs/npmi-pfd.pdf>`_.
 	```
 	
-	Alternatively define it once and reuse it later.
+	Sphinx also allows an alternative style that is also sometimes used in `gensim`. However note that this style
+	is not **deprecated**, please use the above way instead.
 	```
 	References
     ----------
@@ -98,6 +101,7 @@ See example above where `num_terms` is method argument.
 	""" Applies the transformation explained in [1]_. """
 		pass
 	```
+
 
 
 
